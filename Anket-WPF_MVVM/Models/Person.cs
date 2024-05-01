@@ -6,6 +6,6 @@ public class Person
     public string? Surname { get; set; }
     public string? Email { get; set; }
     public string? PhoneNumber { get; set; }
-    public DateTime? Brithday { get; set; }
+    public string? Brithday { get; set; }
 
 }

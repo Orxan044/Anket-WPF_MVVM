@@ -14,7 +14,7 @@ public class RelayCommand : ICommand
     private readonly Action<object?>? _execute;
 
 
-    public RelayCommand(Predicate<object?>? canExecute, Action<object?>? execute = null)
+    public RelayCommand(Action<object?>? execute, Predicate<object?>? canExecute = null)
     {
         _canExecute = canExecute;
         _execute = execute ?? throw new ArgumentNullException(nameof(execute));
