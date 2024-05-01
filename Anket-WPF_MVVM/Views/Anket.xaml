@@ -23,11 +23,11 @@
             </StackPanel>
 
             <StackPanel Margin="0,17" Grid.Column="1" >
-                <TextBox Text="{Binding SelectedPerson.Name}" Width="180" x:Name="txtBoxName" Margin="0,6,86,0" ></TextBox>
-                <TextBox Text = "{Binding SelectedPerson.Surname}" Width="180" x:Name="txtBoxSurname" Margin="0,18,86,0" ></TextBox>
-                <TextBox Text = "{Binding SelectedPerson.Email}" Width="180" x:Name="txtBoxEmail" Margin="0,18,86,0" ></TextBox>
-                <TextBox Text = "{Binding SelectedPerson.PhoneNumber}" Width="180" x:Name="txtBoxPhone" Margin="0,18,86,0" ></TextBox>
-                <TextBox Text = "{Binding SelectedPerson.Brithday}" Width="180" x:Name="txtBoxBrihtday" Margin="0,18,86,0" ></TextBox>
+                <TextBox Text="{Binding NewPersonName, UpdateSourceTrigger=PropertyChanged}" Width="180" x:Name="txtBoxName" Margin="0,6,86,0" ></TextBox>
+                <TextBox Text = "{Binding NewPersonSurname, UpdateSourceTrigger=PropertyChanged}" Width="180" x:Name="txtBoxSurname" Margin="0,18,86,0" ></TextBox>
+                <TextBox Text = "{Binding NewPersonEmail, UpdateSourceTrigger=PropertyChanged}" Width="180" x:Name="txtBoxEmail" Margin="0,18,86,0" ></TextBox>
+                <TextBox Text = "{Binding NewPersonPhoneNumber, UpdateSourceTrigger=PropertyChanged}" Width="180" x:Name="txtBoxPhone" Margin="0,18,86,0" ></TextBox>
+                <DatePicker Text="{Binding NewPersonBirthday, UpdateSourceTrigger=PropertyChanged}" Width="180" Margin="0,18,86,0"></DatePicker>
                 <Button Content="Add Person" Height="30" Width="100" Margin="0,30,10,0" Command="{Binding AddPerson}"></Button>
             </StackPanel>
         </Grid>
@@ -35,7 +35,7 @@
         <Grid Width="200" Margin="400,0,0,70">
             <StackPanel Height="203">
                 <Label FontSize="16" Height="30" Padding="70,5" Background="Black" Foreground="White" Content="Person's"/>
-                <ListBox ItemsSource="{Binding Persons}" Height="153"></ListBox>
+                <ListBox ItemsSource="{Binding Persons, UpdateSourceTrigger=PropertyChanged}" Height="153"></ListBox>
                 <TextBox x:Name="txtBoxFaylName" Height="20" ></TextBox>
 
             </StackPanel>
