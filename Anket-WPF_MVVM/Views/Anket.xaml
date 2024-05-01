@@ -4,14 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Anket_WPF_MVVM.Views"
+        xmlns:design="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Anket" Height="300" Width="650">
+        Title="Anket" Height="325" Width="700">
 
-    <Grid Height="300" Width="600">
-        <Grid Width="400" Margin="0,0,200,0">
+    <Grid Height="300" Width="700">
+        <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
             <StackPanel Margin="15" Grid.Column="0">
@@ -23,24 +25,36 @@
             </StackPanel>
 
             <StackPanel Margin="0,17" Grid.Column="1" >
-                <TextBox Text="{Binding Person.Name}" Width="180" x:Name="txtBoxName" Margin="0,6,86,0" ></TextBox>
-                <TextBox Width="180" x:Name="txtBoxSurname" Margin="0,18,86,0" ></TextBox>
-                <TextBox Width="180" x:Name="txtBoxEmail" Margin="0,18,86,0" ></TextBox>
-                <TextBox Width="180" x:Name="txtBoxPhone" Margin="0,18,86,0" ></TextBox>
-                <TextBox Width="180" x:Name="txtBoxBrihtday" Margin="0,18,86,0" ></TextBox>
-                <Button Content="Add Person" Height="30" Width="100" Margin="0,30,10,0"></Button>
+                <TextBox Text="{Binding NewPerson.Name}" Width="150" x:Name="txtBoxName" Margin="0,0,86,0" ></TextBox>
+                <TextBox Text="{Binding NewPerson.Surname , UpdateSourceTrigger=PropertyChanged}" Width="180" x:Name="txtBoxSurname" Margin="0,10,86,0"  ></TextBox>
+                <TextBox Text="{Binding NewPerson.Email , UpdateSourceTrigger=PropertyChanged}" Width="180" x:Name="txtBoxEmail" Margin="0,10,86,0" ></TextBox>
+                <TextBox Text="{Binding NewPerson.PhoneNumber , UpdateSourceTrigger=PropertyChanged}" Width="180" x:Name="txtBoxPhone" Margin="0,10,86,0" ></TextBox>
+                <Grid Width="150" Margin="0,8,86,0">
+                    <DatePicker SelectedDate="{Binding NewPerson.Brithday , UpdateSourceTrigger=PropertyChanged}" ></DatePicker>
+                </Grid>
+                <Button Content="Add Person" Height="30" Width="106" Margin="0,30,10,0" Command="{Binding AddCommand}"></Button>
+                <Button Content="Change Person" Height="30" FontSize="10" Width="106" Margin="0,5,10,0" Command="{Binding ChangeCommand}"></Button>
             </StackPanel>
-        </Grid>
 
-        <Grid Width="200" Margin="400,0,0,70">
-            <StackPanel Height="203">
-                <Label FontSize="16" Height="30" Padding="70,5" Background="Black" Foreground="White" Content="Person's"/>
-                <ListBox ItemsSource="{Binding Persons}" Height="153"></ListBox>
-                <TextBox x:Name="txtBoxFaylName" Height="20" ></TextBox>
 
+            <StackPanel Grid.Column="2" Margin="0,0,0,17">
+                <Label FontSize="12" Height="30" Padding="55,8,0,0" FontFamily="Bold"  Background="Pink" Foreground="Black" Content="Person's"/>
+                <ListBox ItemsSource="{Binding DbContext.People}" SelectedItem="{Binding Selected}" Height="190">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" ></TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <TextBox Text="{Binding FileName}" ></TextBox>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="Load" FontSize="9" Width="60" Height="20"  Margin="10"
+                        Command="{Binding LoadCommand}" />
+                    <Button Content="Save" Width="60" FontSize="9" Height="20" Margin="10" 
+                        Command="{Binding SaveCommand}"/>
+                </StackPanel>
             </StackPanel>
-            <Button x:Name="btnLoad" Padding="0,0,5,0" Content="Load" Width="80" VerticalAlignment="Bottom" Height="20" HorizontalAlignment="Left" Margin="0,0,0,-26"/>
-            <Button x:Name="btnSave" Content="Save" Width="80" VerticalAlignment="Bottom" Height="20" HorizontalAlignment="Right" Margin="0,0,9,-26"/>
+
         </Grid>
     </Grid>
 
