@@ -5,6 +5,7 @@ namespace Anket_WPF_MVVM.Models;
 
 public class Person : INotifyPropertyChanged
 {
+<<<<<<< HEAD
     private string? name;
     private string? surname;
     private string? email;
@@ -25,5 +26,12 @@ public class Person : INotifyPropertyChanged
     protected void OnPropertyChanged([CallerMemberName] string? paramName = null) => 
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(paramName)); 
     // -----------------------------------------------------------------
+=======
+    public string? Name { get; set; }
+    public string? Surname { get; set; }
+    public string? Email { get; set; }
+    public string? PhoneNumber { get; set; }
+    public DateTime Brithday { get; set; }
+>>>>>>> c511e1b7491fafea2a5546e4a05376a315ad5ac9
 
 }

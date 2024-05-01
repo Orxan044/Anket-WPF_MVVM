@@ -3,15 +3,21 @@ using Anket_WPF_MVVM.Data;
 using Anket_WPF_MVVM.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+<<<<<<< HEAD
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Windows;
+=======
+using System.Runtime.CompilerServices;
+using System.Xml.Linq;
+>>>>>>> c511e1b7491fafea2a5546e4a05376a315ad5ac9
 
 namespace Anket_WPF_MVVM.ViewModels;
 
-public class AnketViewModel
+public class AnketViewModel : INotifyPropertyChanged
 {
+<<<<<<< HEAD
     private Person newPerson;
     private Person selectedPerson;
     private string? fileName;
@@ -26,10 +32,21 @@ public class AnketViewModel
 
     public RelayCommand SaveCommand { get; set; }
     public RelayCommand LoadCommand { get; set; }
+=======
+    private ObservableCollection<Person> _persons;
+    public ObservableCollection<Person> Persons
+    {
+        get { return _persons; }
+        set { _persons = value; OnPropertyChanged();}
+    }
+    private Person SelectedPerson { get; set; } 
+>>>>>>> c511e1b7491fafea2a5546e4a05376a315ad5ac9
 
+    public RelayCommand ?AddPerson { get; set; }
 
     public AnketViewModel()
     {
+<<<<<<< HEAD
         DbContext = new(FileName);
         NewPerson = new Person();
         SelectedPerson = null;
@@ -46,6 +63,78 @@ public class AnketViewModel
         
         DbContext.AddPerson(NewPerson);
         NewPerson = new Person();
+=======
+        Persons = new();
+        SelectedPerson = new()
+        {
+            Name = NewPersonName,
+            Surname = NewPersonName,
+            PhoneNumber = NewPersonPhoneNumber,
+            Email = NewPersonEmail,
+            Brithday = NewPersonBirthday
+
+        };
+        AddPerson = new RelayCommand(parameter =>
+        {
+            Persons.Add(SelectedPerson);
+        });
+
+    }
+
+    private string? _newPersonName;
+    public string? NewPersonName
+    {
+        get { return _newPersonName; }
+        set
+        {
+            _newPersonName = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private string? _newPersonSurname;
+    public string? NewPersonSurname
+    {
+        get { return _newPersonSurname; }
+        set
+        {
+            _newPersonSurname = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private string? _newPersonPhoneNumber;
+    public string? NewPersonPhoneNumber
+    {
+        get { return _newPersonPhoneNumber; }
+        set
+        {
+            _newPersonPhoneNumber = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private string? _newPersonEmail;
+    public string? NewPersonEmail
+    {
+        get { return _newPersonEmail; }
+        set
+        {
+            _newPersonEmail= value;
+            OnPropertyChanged();
+        }
+    }
+
+    private DateTime _newPersonBirthday = DateTime.Today;
+    public DateTime NewPersonBirthday
+    {
+        get { return _newPersonBirthday; }
+        set
+        {
+            _newPersonBirthday = value;
+            OnPropertyChanged();
+        }
+>>>>>>> c511e1b7491fafea2a5546e4a05376a315ad5ac9
     }
 
     public void SavePeople(object? param)
@@ -78,4 +167,10 @@ public class AnketViewModel
 
 
 
+    public event PropertyChangedEventHandler? PropertyChanged;
+    private void OnPropertyChanged([CallerMemberName] string name = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    }
+    
 }
